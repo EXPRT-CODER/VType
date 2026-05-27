@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Disable text selection site-wide, but keep form controls selectable */
+html, body, #root, .app {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input,
+textarea,
+select,
+button,
+[contenteditable="true"] {
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+body{
+    background-color: #191A1B;
+}
