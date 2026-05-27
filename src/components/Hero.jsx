@@ -20,10 +20,15 @@ const Hero = () => {
 
   const inputRefs = useRef([]);
   const handleInput = (e , index) => {
-    if(e.target.value !== data[index]) {
+    if(e.target.value !== data[index] && e.target.value !== '') {
       e.target.classList.remove("text-white");
       e.target.classList.add("text-red-500");
     } 
+
+    if(e.target.value === '') {
+      e.target.classList.remove("text-red-500");
+      e.target.classList.add("text-white");
+    }
 
     if(e.target.value.length === 1 && index < data.length - 1 ) {
       inputRefs.current[index +1].focus();
