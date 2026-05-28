@@ -30,7 +30,7 @@ const HeroV2 = () => {
 
     return (
 
-        <div className='h-[var(--screen-height)] md:h-[calc(var(--screen-height)-4rem)] md:mt-16 w-full overflow-hidden flex justify-center items-center bg-black'>
+        <div className='h-(--screen-height) md:h-[calc(var(--screen-height)-4rem)] md:mt-16 w-full overflow-hidden flex justify-center items-center bg-black'>
 
             <div
                 onClick={() => inputRef.current.focus()}
