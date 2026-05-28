@@ -48,9 +48,9 @@ const Hero = () => {
           autoFocus={index === 0}
             type="text"
             placeholder={char} 
-            
+
             key={index}
-            className='w-3 bg-transparent  rounded-lg  
+            className='w-2.5 text-start bg-transparent  rounded-lg  
               focus:outline-none focus:border-blue-500
               transition duration-300 text-white'
               
