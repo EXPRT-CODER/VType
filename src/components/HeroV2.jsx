@@ -30,7 +30,7 @@ const HeroV2 = () => {
 
     return (
 
-        <div className='h-(--screen-height) md:h-[calc(var(--screen-height)-4rem)] md:mt-16 w-full overflow-hidden flex justify-center items-center bg-black'>
+        <div className='h-[var(--screen-height)] md:h-[calc(var(--screen-height)-4rem)] md:mt-16 w-full overflow-hidden flex justify-center items-center bg-black'>
 
             <div
                 onClick={() => inputRef.current.focus()}
@@ -45,10 +45,10 @@ const HeroV2 = () => {
                     onChange={(e) => setTyped(e.target.value)}
                     autoFocus
                     spellCheck={false}
-                    className='absolute inset-0 opacity-0'
+                    className='absolute inset-0 opacity-0 caret-transparent text-transparent outline-none'
                 />
 
-                <div className='no-scrollbar h-full overflow-y-scroll p-4 text-3xl leading-relaxed'>
+                <div className='no-scrollbar h-full overflow-y-scroll p-4 font-mono text-3xl leading-relaxed'>
                     {/* Text */}
                     {text.split("").map((char, index) => {
 
@@ -56,24 +56,30 @@ const HeroV2 = () => {
 
                         if (index < typed.length) {
 
-                            color =
-                                typed[index] === char
-                                    ? "text-white"
-                                    : "text-red-500";
+                            color = typed[index] === char
+                                    ?  "text-white"
+                                    :  "text-red-500" ;
+
+                            if(typed[index] !== char && char === ' '){
+                                    color = 'bg-gray-500 rounded-sm';
+                            }              
                         }
+                        const finalChar = char === ' ' ? '\u00A0' : char ;
 
                         return (
 
                             <span
                                 key={index}
-                                className={`${color} relative`}
+                                className={`${color} relative inline-flex h-[1.25em] w-[1.03em] items-center justify-center align-middle leading-none tracking-normal`}
                             >
 
-                                {char}
+                                {finalChar}
 
                                 {/* Fake Caret */}
                                 {index === typed.length && (
-                                    <span className='absolute left-0 top-1 w-0.5 h-[85%] bg-white animate-pulse rounded-full'></span>
+                                    <span className='absolute -left-0.75 top-4.5 -translate-y-1/2 animate-pulse text-gray-300'>
+                                        |
+                                    </span>
                                 )}
 
                             </span>
