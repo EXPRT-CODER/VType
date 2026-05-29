@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
+import axios from 'axios';
+import paragraph from '../data/paragraphs.js';
 
 const HeroV2 = () => {
 
-    const text =
-        "The quick brown fox. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.";
+    const text = paragraph[Math.floor(Math.random() * paragraph.length)];
+
 
     const [typed, setTyped] = useState("");
 
@@ -37,11 +39,11 @@ const HeroV2 = () => {
                     <span
                         key={index}
                         ref={index === typed.length ? caretRef : null}
-                        className={`${color} relative inline-flex h-[1.35em] w-[0.5em] sm:w-[0.6em] items-center justify-center align-middle leading-none tracking-normal`}
+                        className={`${color} relative inline-flex h-[1.35em] w-[0.5em] sm:w-[0.63em] items-center justify-center align-middle leading-none tracking-normal`}
                     >
                         {finalChar}
                         {index === typed.length && (
-                            <span className="absolute -left-3 top-4.5 -translate-y-1/2 animate-pulse text-gray-300">
+                            <span className="absolute -left-2 top-4.5 -translate-y-1/2 animate-pulse text-gray-300">
                                 |
                             </span>
                         )}
