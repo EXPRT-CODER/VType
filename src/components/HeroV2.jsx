@@ -115,7 +115,7 @@ const HeroV2 = () => {
 
             <div
                 onClick={() => inputRef.current.focus()}
-                className='relative mt-20 md:mt-0 sm:mt-10 h-[74vh] w-[80%] overflow-hidden cursor-text'
+                className='relative mt-20 md:mt-0 sm:mt-10 h-[74vh] w-[90%] md:w-[80%] overflow-hidden cursor-text '
             >
 
                 {/* Hidden Input */}
@@ -144,7 +144,7 @@ const HeroV2 = () => {
                         </span>
                     ))}
                     <span
-                        className={`absolute left-0 top-0 ${caretWidthClass} rounded-sm ${caretColorClass} transition-all duration-150 ease-out animate-pulse`}
+                        className={`absolute -left-1.5 top-0 ${caretWidthClass} rounded-sm ${caretColorClass} transition-all duration-150 ease-out animate-pulse`}
                         style={{
                             transform: `translate3d(${caretStyle.left}px, ${caretStyle.top}px, 0)`,
                             height: `${caretStyle.height * caretHeightRatio}px`,
