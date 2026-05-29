@@ -41,4 +41,4 @@ const paragraphs = [
   "Tourist destinations built around natural wonderlands, such as waterfalls, lakes, and volcanic landscapes, offer visitors a dramatic connection to the Earth’s power and beauty. Hiking trails, scenic overlooks, and guided tours reveal how erosion, tectonics, and hydrology shape majestic scenery. These destinations often become symbols of national identity and pride. Promoting sustainable visitation practices helps protect fragile environments from overcrowding and pollution. By exploring natural wonderlands responsibly, travelers gain appreciation for Earth’s geological forces and the need to preserve those remarkable places for future explorers.",
 ];
 
-export default paragraphs;
+export default paragraphs[Math.floor(Math.random() * paragraphs.length)];

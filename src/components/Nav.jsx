@@ -8,7 +8,7 @@ function Nav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-gray-500">VType</div>
+            <a target="_blank" href="https://portfolio-exprt-coder.netlify.app" className="text-2xl font-bold text-gray-500 hover:text-gray-400">VType</a>
           </div>
 
           <div className="hidden md:block">

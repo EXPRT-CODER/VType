@@ -1,20 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react'
-import axios from 'axios';
-import paragraph from '../data/paragraphs.js';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import paragraphs from '../data/paragraphs.js';
 
 const HeroV2 = () => {
 
-    const text = paragraph[Math.floor(Math.random() * paragraph.length)];
+
+        const text = paragraphs;
+  
 
 
     const [typed, setTyped] = useState("");
+    const [caretStyle, setCaretStyle] = useState({ left: 0, top: 0, height: 0 });
+
+    const caretWidthClass = 'w-1';
+    const caretHeightRatio = 0.9;
+    const caretColorClass = 'bg-gray-400';
 
     const inputRef = useRef(null);
     const scrollRef = useRef(null);
-    const caretRef = useRef(null);
+    const currentCharRef = useRef(null);
 
     const textSegments = [];
     let charIndex = 0;
+    const caretIndex = Math.min(typed.length, text.length - 1);
 
     text.split(/(\s+)/).forEach((segment) => {
         const isSpace = /^\s+$/.test(segment);
@@ -38,15 +45,10 @@ const HeroV2 = () => {
                 return (
                     <span
                         key={index}
-                        ref={index === typed.length ? caretRef : null}
-                        className={`${color} relative inline-flex h-[1.35em] w-[0.5em] sm:w-[0.63em] items-center justify-center align-middle leading-none tracking-normal`}
+                        ref={index === caretIndex ? currentCharRef : null}
+                        className={`${color} relative inline-flex h-[1.25em] w-[0.5em] sm:w-[0.63em] items-center justify-center align-middle leading-none tracking-normal`}
                     >
                         {finalChar}
-                        {index === typed.length && (
-                            <span className="absolute -left-2 top-4.5 -translate-y-1/2 animate-pulse text-gray-300">
-                                |
-                            </span>
-                        )}
                     </span>
                 );
             }),
@@ -73,10 +75,10 @@ const HeroV2 = () => {
     }, []);
 
     useEffect(() => {
-        if (!scrollRef.current || !caretRef.current) return;
+        if (!scrollRef.current || !currentCharRef.current) return;
 
         const scrollElement = scrollRef.current;
-        const caretElement = caretRef.current;
+        const caretElement = currentCharRef.current;
         const blurAreaHeight = 112; // same as h-28
 
         const caretTop = caretElement.offsetTop;
@@ -91,6 +93,20 @@ const HeroV2 = () => {
         } else if (caretTop < visibleTop) {
             scrollElement.scrollTo({ top: caretTop, behavior: 'smooth' });
         }
+    }, [typed]);
+
+    useLayoutEffect(() => {
+        if (!scrollRef.current || !currentCharRef.current) return;
+
+        const scrollElement = scrollRef.current;
+        const scrollRect = scrollElement.getBoundingClientRect();
+        const charRect = currentCharRef.current.getBoundingClientRect();
+
+        setCaretStyle({
+            left: charRect.left - scrollRect.left + scrollElement.scrollLeft,
+            top: charRect.top - scrollRect.top + scrollElement.scrollTop,
+            height: charRect.height,
+        });
     }, [typed]);
 
     return (
@@ -115,7 +131,8 @@ const HeroV2 = () => {
 
                 <div
                     ref={scrollRef}
-                    className='no-scrollbar h-full overflow-y-scroll p-4 font-mono text-3xl leading-relaxed'
+                    style={{ scrollBehavior: 'smooth' }}
+                    className='relative no-scrollbar h-full overflow-y-scroll p-4 font-mono text-3xl leading-relaxed'
                 >
                     {/* Text */}
                     {textSegments.map((segment, segmentIndex) => (
@@ -126,6 +143,13 @@ const HeroV2 = () => {
                             {segment.chars}
                         </span>
                     ))}
+                    <span
+                        className={`absolute left-0 top-0 ${caretWidthClass} rounded-sm ${caretColorClass} transition-all duration-150 ease-out animate-pulse`}
+                        style={{
+                            transform: `translate3d(${caretStyle.left}px, ${caretStyle.top}px, 0)`,
+                            height: `${caretStyle.height * caretHeightRatio}px`,
+                        }}
+                    />
                 </div>
 
                 <div className='pointer-events-none absolute bottom-0 left-0 right-0 h-28 bg-linear-to-t from-black via-black/80 to-transparent backdrop-blur-[1px]' />
