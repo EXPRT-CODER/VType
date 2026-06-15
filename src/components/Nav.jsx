@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Nav() {
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
 
   return (
-    <nav className="bg-transparent backdrop-blur-lg border-b border-gray-700 shadow-md shadow-black fixed top-0 w-screen z-999">
+    <nav className="backdrop-blur-md border-b border-gray-700 shadow-md shadow-black fixed top-0 w-screen z-999 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -14,16 +16,27 @@ function Nav() {
           <div className="hidden md:block">
             <ul className="flex space-x-6 text-gray-500">
               <li>
-                <a href="#home" className="hover:text-gray-400">Home</a>
+                <Link to="#Home" className="hover:text-gray-400">Home</Link>
               </li>
               <li>
-                <a href="#practice" className="hover:text-gray-400">Practice</a>
+                <Link to="/practice" className="hover:text-gray-400">Practice</Link>
               </li>
               <li>
-                <a href="#stats" className="hover:text-gray-400">Stats</a>
+                <Link to="#stats" className="hover:text-gray-400">Stats</Link>
               </li>
               <li>
-                <a href="#settings" className="hover:text-gray-400">Settings</a>
+                <details>
+                  <summary>
+                    Versions
+                  </summary>
+
+                  <ul className="absolute">
+                    <li><Link to='/V1'>V1</Link></li>
+                    <li><Link to='/V2'>V2</Link></li>
+                    <li><Link to='/V3/practice'>V3</Link></li>
+                  </ul>
+                </details>
+                
               </li>
             </ul>
           </div>
@@ -48,11 +61,20 @@ function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden px-2 pt-2 pb-3 space-y-1 bg-transparent">
-          <a href="#home" className="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-gray-400">Home</a>
-          <a href="#practice" className="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-gray-400">Practice</a>
-          <a href="#stats" className="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-gray-400">Stats</a>
-          <a href="#settings" className="block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-gray-400">Settings</a>
+        <div className="md:hidden px-2 pt-2 pb-3 space-y-1 bg-transparent  text-gray-500 hover:text-gray-400">
+          <a href="#home" className="block px-3 py-2 text-base font-medium ">Home</a>
+          <a href="#practice" className="block px-3 py-2  text-base font-medium ">Practice</a>
+          <a href="#stats" className="block px-3 py-2  text-base font-medium ">Stats</a>
+          <div className="flex px-3 py-2 text-base font-medium gap-2">
+            <button onClick={() => {setShow((prev)=> !prev)}} >
+              Versions
+            </button>
+            {show && <>
+            <Link to='/V1'>V1</Link>
+            <Link to='/V2'>V2</Link>
+            <Link to='/V3/practice'>V3</Link>
+            </>}
+          </div>
         </div>
       )}
     </nav>

@@ -4,7 +4,7 @@ import paragraphs from '../data/paragraphs.js';
 const HeroV2 = () => {
 
 
-        const text = paragraphs;
+    const text = paragraphs;
   
 
 

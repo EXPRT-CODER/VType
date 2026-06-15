@@ -1,22 +1,11 @@
-import React, {useRef , useState , useEffect} from 'react';
-import axios from 'axios';
+import React, {useRef} from 'react';
+import paragraphs from '../data/paragraphs.js';
+
 
 const Hero = () => {
 
-  const [data, setData] = useState('');
+  const data = paragraphs;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://baconipsum.com/api/?type=meat-and-filler&paras=1');
-        setData(response.data[0]);  
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const inputRefs = useRef([]);
   const handleInput = (e , index) => {
@@ -41,7 +30,7 @@ const Hero = () => {
    }
 
   return (
-    <div className='h-screen w-screen flex justify-center items-center'>
+    <div className='bg-black h-screen w-screen flex justify-center items-center'>
       <div className='p-5 overflow-hidden border-3 border-gray-500 rounded-2xl h-90 w-[80%] mx-20'>
         {data.split('').map((char, index) => (
           <input 
