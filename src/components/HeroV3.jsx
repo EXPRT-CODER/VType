@@ -1,7 +1,7 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import paragraphs from '../data/paragraphs.js';
 
-const HeroV2 = () => {
+const HeroV3 = () => {
 
     const text =  paragraphs;
     const [typed, setTyped] = useState("");
@@ -171,4 +171,4 @@ const HeroV2 = () => {
     )
 }
 
-export default HeroV2;
+export default HeroV3;
