@@ -22,7 +22,7 @@ function Nav() {
                 <Link to="/practice" className="hover:text-gray-400">Practice</Link>
               </li>
               <li>
-                <Link to="#stats" className="hover:text-gray-400">Stats</Link>
+                <Link to="https://instagram.com/vishal.xtt" target="_blank" className="hover:text-gray-400">Contact Me</Link>
               </li>
               <li>
                 <details>
@@ -63,8 +63,8 @@ function Nav() {
       {open && (
         <div className="md:hidden px-2 pt-2 pb-3 space-y-1 bg-transparent  text-gray-500 hover:text-gray-400">
           <a href="#home" className="block px-3 py-2 text-base font-medium ">Home</a>
-          <a href="#practice" className="block px-3 py-2  text-base font-medium ">Practice</a>
-          <a href="#stats" className="block px-3 py-2  text-base font-medium ">Stats</a>
+          <a href="#Practice" rel="noopener noreferrer" className="block px-3 py-2  text-base font-medium ">Practice</a>
+          <a href="https://instagram.com/vishal.xtt" target="_blank" className="block px-3 py-2  text-base font-medium ">Contact Me</a>
           <div className="flex px-3 py-2 text-base font-medium gap-2">
             <button onClick={() => {setShow((prev)=> !prev)}} >
               Versions
