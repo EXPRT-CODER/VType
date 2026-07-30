@@ -1,9 +1,10 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
-import paragraphs from '../data/paragraphs.js';
+import { getRandomParagraph } from '../data/paragraphs.js';
+import { RefreshCw } from 'lucide-react';
 
 const HeroV3 = () => {
 
-    const text =  paragraphs;
+    const [text, setText] = useState(() => getRandomParagraph());
     const [typed, setTyped] = useState("");
     const [mistakes, setMistakes] = useState(0);
     const [keystrokes, setKeystrokes] = useState(0);
@@ -48,6 +49,7 @@ const HeroV3 = () => {
     }, []);
   
     
+    const inputRef = useRef(null);
     //this ref have all character pointers
     const charRefs = useRef([]);
     //this ref have contaner pointer for caret position calculation inside container
@@ -59,6 +61,23 @@ const HeroV3 = () => {
         top: 0,
         height: 0,
     });
+
+    const resetText = () => {
+        const nextParagraph = getRandomParagraph(text);
+        setText(nextParagraph);
+        setTyped("");
+        setMistakes(0);
+        setKeystrokes(0);
+        startTime.current = null;
+        setCurrentTime(Date.now());
+        setCaretPos({ left: 0, top: 0, height: 0 });
+        if (containerRef.current) {
+            containerRef.current.scrollTop = 0;
+        }
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    };
 
     useLayoutEffect(() => {
 
@@ -112,18 +131,23 @@ const HeroV3 = () => {
  
     return (
         <div className='h-screen w-full flex justify-center items-center bg-black'>
+            <button onClick={resetText} className=' text-gray-500 bold fixed top-26 right-12 sm:right-20 lg:right-70 transition-all duration-300 ease-in-out'>
+                <RefreshCw size={24} />
+            </button>
             <div
                 ref={containerRef} 
-                className=' leading-11 whitespace-pre-wrap  relative mt-10 md:mt-20 sm:mt-10 h-[74vh] w-[87%] md:w-[80%] overflow-y-scroll px-2 py-5 md:py-0 scrollbar-hide'
+                className='leading-11 whitespace-pre-wrap  relative mt-10 md:mt-20 sm:mt-10 h-[74vh] w-[87%] md:w-[80%] overflow-y-scroll px-2 py-5 md:py-0 scrollbar-hide'
             >
                 {/* hidden input  */}
                 <input
+                    ref={inputRef}
                     type="text"
                     value={typed}
                     onChange={handleChange}
                     autoFocus
                     spellCheck={false}
-                    className='fixed inset-0 opacity-0 pointer-none'
+                    className='fixed left-0 right-0 top-34 bottom-0 opacity-0 pointer-none--
+                    '
                 />
                 {/* our curte carrot */}
                <div
