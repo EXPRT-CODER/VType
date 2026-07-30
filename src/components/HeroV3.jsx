@@ -131,7 +131,7 @@ const HeroV3 = () => {
  
     return (
         <div className='h-screen w-full flex justify-center items-center bg-black'>
-            <button onClick={resetText} className=' text-gray-500 bold fixed top-26 right-12 sm:right-20 lg:right-70 transition-all duration-300 ease-in-out'>
+            <button onClick={resetText} className=' text-gray-500 bold fixed top-26 right-12 sm:right-20 lg:right-45 transition-all duration-300 ease-in-out'>
                 <RefreshCw size={24} />
             </button>
             <div
